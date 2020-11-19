@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
             Intent i = new Intent(MainActivity.this, ImagePreview.class);
             startActivity(i);
+            finish();
         });
 
 

@@ -6,38 +6,27 @@ from Helper import adaptivethresholding, ocr
 
 app = Flask(__name__)
 
-
-@app.route('/file-down/')
-def file_downloads():
-    print(request.base_url)
-    return jsonify("ok")
-
-
-
-@app.route('/posts_image',  methods = ['POST'])
-def method():
+@app.route('/doOP/', methods=['POST'])
+def doop():
+    operation = request.args.get("operation")
     files_ids = list(flask.request.files)
     file_id = files_ids[0]   
     imagefile = flask.request.files[file_id]
     filename = werkzeug.utils.secure_filename(imagefile.filename)
     imagefile.save(filename)
-    return jsonify("OK")
-
-
-@app.route('/doOP/')
-def doop():
-    filename = request.args.get("image")+'.jpg'
-    operation = request.args.get("operation")
     
     if operation == "adaptivethresholding":
-        adaptivethresholding(filename)
-        return jsonify(request.host_url+'getOP/')
+        adaptivethresholding(filename, False)
+        return jsonify({"url":"",
+                        "isurl":True})
     elif operation=="ocr":
-        return jsonify(ocr(filename))
+        return jsonify({"url":"",
+                        "isurl":False})
         
 @app.route('/getOP/')
 def getop():
-    return send_file("op.jpg", as_attachment = True)
+    filename = request.args.get("filename")
+    return send_file(filename+"_op.jpg", as_attachment = True) 
     
     
 if __name__ == '__main__':

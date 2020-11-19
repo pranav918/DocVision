@@ -1,9 +1,7 @@
 package com.example.docvision;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -33,14 +31,34 @@ public class Connect {
     }
 
 
-    public void upload_image(Bitmap bitmap, String filename) {
+    public void ops(String op, String filename, Bitmap bitmap) {
+        MultipartBody.Part body = uploadBody(bitmap, filename);
 
-        //final Bitmap fbitmap = Bitmap.createScaledBitmap(bitmap, 150, 200, true);
+        Call<_Response> call = requests.doOP(body, op);
+        call.enqueue(new Callback<_Response>() {
+            @Override
+            public void onResponse(Call<_Response> call, Response<_Response> response) {
+                if (response.isSuccessful() && response.code() == 200) {
+                    ((ImagePreview) context).callback(new _Response(down(filename), true));
+                } else {
+                    Toast.makeText(context, "Error :(", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<_Response> call, Throwable t) {
+                Toast.makeText(context, "Error :(", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private MultipartBody.Part uploadBody(Bitmap bitmap, String filename) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         byte[] byteArray = stream.toByteArray();
 
-        File f = new File(context.getCacheDir(), filename +".jpg");
+        File f = new File(context.getCacheDir(), filename + ".jpg");
         try {
             f.createNewFile();
         } catch (IOException e) {
@@ -64,47 +82,11 @@ public class Connect {
         RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), f);
         MultipartBody.Part body = MultipartBody.Part.createFormData("upload", f.getName(), reqFile);
 
-        Call<String> call = requests.postimage(body);
-
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful() && response.code() == 200) {
-                    if (!response.body().equals("OK")) {
-                        Toast.makeText(context, "Server caused error", Toast.LENGTH_SHORT).show();
-                        ((Activity) context).finish();
-                    }
-                    else
-                        f.delete();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(context, "Error while uploading image\n" + "Please check your internet connection", Toast.LENGTH_SHORT).show();
-                Log.e("123456789", t.getMessage()+"\n"+t.toString());
-                ((Activity) context).finish();
-            }
-        });
+        return body;
     }
 
-    public void ops(String op, String filename) {
-        Call<String> call = requests.doOP(op, filename);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful() && response.code() == 200) {
-                    ((ImagePreview) context).callback(response.body());
-                } else {
-                    Toast.makeText(context, "Error :(", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(context, "Error :(", Toast.LENGTH_SHORT).show();
-            }
-        });
+    public String down(String filename) {
+        return retrofit.baseUrl() + "getOP/?filename=" + filename;
 
     }
 

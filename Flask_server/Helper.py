@@ -10,18 +10,10 @@ def adaptivethresholding(filename, ret):
     if ret:
         return thresh
     else:
-        cv2.imwrite("op.jpg", thresh);
+        cv2.imwrite(filename[:-4]+"_op.jpg", thresh);
     
 def ocr(filename):
-    #img = adaptivethresholding(filename, True)
     img = cv2.imread(filename)
     text = pytesseract.image_to_string(img, config = "--psm 6")
-        
-    
-    
-#adaptivethresholding("m4YsOkKuQG.jpg")
-#ocr("694O4RoLIO.jpg")
-
-
 
     

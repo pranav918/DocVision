@@ -9,12 +9,14 @@ import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 public interface Requests {
-    @Multipart
-    @POST("posts_image")
-    Call<String> postimage(@Part MultipartBody.Part image_file);
 
-    @GET("doOP/")
-    Call<String> doOP(@Query("operation") String op,
-                      @Query("image") String image);
+    @Multipart
+    @POST("doOP/")
+    Call<_Response> doOP(@Part MultipartBody.Part image_file,
+                         @Query("operation") String op);
+
+
+    @GET("getOP/")
+    Call<String> down(@Query("filename") String filename);
 
 }

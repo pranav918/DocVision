@@ -1,13 +1,11 @@
 package com.example.docvision;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
-import android.util.Log;
 
 public class Helper {
 
@@ -28,7 +26,7 @@ public class Helper {
 
     // taking too much time
     public static Bitmap adaptiveThresholding(Bitmap src, int window, int C) {
-        Log.e("123456789", "aa gaya");
+
         Bitmap bmOut = Bitmap.createBitmap(src.getWidth(), src.getHeight(), src.getConfig());
 
         int width = src.getWidth();
@@ -137,10 +135,13 @@ public class Helper {
         return bmOut;
     }
 
-    public static void ada(String filename, Connect connect) {
-        connect.ops("adaptivethresholding", filename);
+    public static void ada(Bitmap bitmap, String filename, Connect connect) {
+        connect.ops("adaptivethresholding", filename, bitmap);
     }
 
+    public static void ocr(Bitmap bitmap, String filename, Connect connect) {
+        connect.ops("ocr", filename, bitmap);
+    }
 
 
 }

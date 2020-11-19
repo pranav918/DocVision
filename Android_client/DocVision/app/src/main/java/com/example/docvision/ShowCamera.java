@@ -3,7 +3,6 @@ package com.example.docvision;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.hardware.Camera;
-import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -20,19 +19,17 @@ public class ShowCamera extends SurfaceView implements SurfaceHolder.Callback {
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
         Camera.Parameters params = camera.getParameters();
         params.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-        if(this.getResources().getConfiguration().orientation!= Configuration.ORIENTATION_LANDSCAPE){
-            params.set("orientation","portrait");
+        if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
+            params.set("orientation", "portrait");
             camera.setDisplayOrientation(90);
             params.setRotation(90);
-        }
-        else{
-            params.set("orientation","landscape");
+        } else {
+            params.set("orientation", "landscape");
             camera.setDisplayOrientation(0);
             params.setRotation(0);
         }
         List<Camera.Size> sizes = params.getSupportedPictureSizes();
-        for(Camera.Size si:sizes)
-            Log.e("123456789", "" + si.width + " " + si.height);
+
         params.setPictureSize(1280, 720);
         camera.setParameters(params);
         try {
