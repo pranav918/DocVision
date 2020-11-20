@@ -14,6 +14,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,6 +48,7 @@ public class ImagePreview extends AppCompatActivity {
     String filename;
     Context context;
     Connect connect;
+    TextView progressNumber;
 
 
     @Override
@@ -55,6 +57,7 @@ public class ImagePreview extends AppCompatActivity {
         setContentView(R.layout.activity_image_preview);
         tabLayout = findViewById(R.id.tablayout);
         seek = findViewById(R.id.seek);
+        progressNumber = findViewById(R.id.progressNumber);
         fl = findViewById(R.id.iv);
         iv = new ImageView(this);
         iv.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -119,6 +122,8 @@ public class ImagePreview extends AppCompatActivity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 pbvis();
                 int val = (progress - 10) * 5;
+                progressNumber.setText(String.valueOf(val));
+                progressNumber.setX(seekBar.getThumb().getBounds().centerX());
                 ivRunnable(val);
             }
 
@@ -163,8 +168,7 @@ public class ImagePreview extends AppCompatActivity {
 
         Bitmap scaledBitmap = Bitmap.createScaledBitmap(processedBitmap, processedBitmap.getWidth(), processedBitmap.getHeight(), true);
 
-        Bitmap rotatedBitmap = Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
-        return rotatedBitmap;
+        return Bitmap.createBitmap(scaledBitmap, 0, 0, scaledBitmap.getWidth(), scaledBitmap.getHeight(), matrix, true);
     }
 
     private String getalpnum(int n) {
