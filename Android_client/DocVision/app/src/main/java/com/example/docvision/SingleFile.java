@@ -106,18 +106,25 @@ public class SingleFile extends AppCompatActivity {
             PdfDocument document = new PdfDocument();
             int height = 1280 + 60;
             int width = 720 + 100;
-            int reqH, reqW;
-            reqW = width;
-            reqH = height;
-
+            int reqH = 1280, reqW = 720;
+            int new_width=0, new_height=0;
             for (int i = 0; i < arrayList.size(); i++) {
                 Bitmap img = BitmapFactory.decodeFile(root + "/DocVision/Pictures/" + arrayList.get(i) + ".jpg");
+                int imheight = img.getHeight();
+                int imwidth = img.getWidth();
+                new_height = imheight;
+                new_width = imwidth;
+                if(imheight<height || imwidth>width){ // rotated image
+                    new_width = reqW;
+                    new_height = imheight*new_width/imwidth;
+                    img = Bitmap.createScaledBitmap(img, new_width, new_height, false);
+                }
 
-                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(reqW, reqH, 1).create();
+                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(width, height, 1).create();
                 PdfDocument.Page page = document.startPage(pageInfo);
                 Canvas canvas = page.getCanvas();
 
-                canvas.drawBitmap(img, 50, 30, null);
+                canvas.drawBitmap(img, width/2-new_width/2, height/2-new_height/2, null);
 
                 document.finishPage(page);
             }
@@ -139,8 +146,6 @@ public class SingleFile extends AppCompatActivity {
                 }
             });
 
-
-            //ToDo: render pdf (file)
             Uri uri = FileProvider.getUriForFile(this, BuildConfig.APPLICATION_ID , file);
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setDataAndType(uri, "application/pdf");
