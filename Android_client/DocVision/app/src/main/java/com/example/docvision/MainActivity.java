@@ -3,6 +3,7 @@ package com.example.docvision;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -43,11 +44,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         capture.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("UseCompatLoadingForDrawables")
             @Override
             public void onClick(View v) {
                 if (!ptaken) {
                     iv = new ImageView(MainActivity.this);
                     camera.takePicture(null, null, new Camera.PictureCallback() {
+                        @SuppressLint("UseCompatLoadingForDrawables")
                         @Override
                         public void onPictureTaken(byte[] data, Camera camera) {
                             bitmap = precessbytes(data);
