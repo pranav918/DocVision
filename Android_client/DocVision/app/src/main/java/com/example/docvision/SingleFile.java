@@ -94,6 +94,8 @@ public class SingleFile extends AppCompatActivity {
         String root = Environment.getExternalStorageDirectory().toString();
 
         File myDir = new File(root + "/DocVision/Docs");
+        if(!myDir.exists())
+            myDir.mkdirs();
         String fname = "file.pdf";
         File file = new File(myDir, fname);
 
@@ -107,7 +109,7 @@ public class SingleFile extends AppCompatActivity {
             reqH = height;
 
             for (int i = 0; i < arrayList.size(); i++) {
-                Bitmap img = BitmapFactory.decodeFile(root + "/DocVision/" + arrayList.get(i) + ".jpg");
+                Bitmap img = BitmapFactory.decodeFile(root + "/DocVision/Pictures/" + arrayList.get(i) + ".jpg");
 
                 PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(reqW, reqH, 1).create();
                 PdfDocument.Page page = document.startPage(pageInfo);
@@ -128,7 +130,13 @@ public class SingleFile extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-            Toast.makeText(SingleFile.this, "PDF Generated", Toast.LENGTH_SHORT).show();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(SingleFile.this, "PDF Generated", Toast.LENGTH_SHORT).show();
+                }
+            });
+
 
             //ToDo: render pdf (file)
 
