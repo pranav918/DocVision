@@ -18,8 +18,8 @@ import java.util.ArrayList;
 
 public class SingleFileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private ArrayList<String> data;
-    private Context context;
+    private final ArrayList<String> data;
+    private final Context context;
 
     public SingleFileAdapter(ArrayList<String> data, Context context) {
         this.data = data;
@@ -30,8 +30,7 @@ public class SingleFileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View imageview = LayoutInflater.from(context).inflate(R.layout.indv_list_item, parent, false);
-        ItemViewHolder vh = new ItemViewHolder(imageview);
-        return vh;
+        return new ItemViewHolder(imageview);
 
     }
 
@@ -50,7 +49,7 @@ public class SingleFileAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         return data.size();
     }
 
-    public class ItemViewHolder extends RecyclerView.ViewHolder {
+    public static class ItemViewHolder extends RecyclerView.ViewHolder {
         ImageView iv;
 
         public ItemViewHolder(@NonNull View itemView) {
