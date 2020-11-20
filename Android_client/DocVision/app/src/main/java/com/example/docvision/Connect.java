@@ -39,7 +39,10 @@ public class Connect {
             @Override
             public void onResponse(Call<_Response> call, Response<_Response> response) {
                 if (response.isSuccessful() && response.code() == 200) {
+                    if(op.equals("adaptivethresholding"))
                     ((ImagePreview) context).callback(new _Response(down(filename), true));
+                    else
+                        ((ImagePreview) context).callback(response.body());
                 } else {
                     Toast.makeText(context, "Error :(", Toast.LENGTH_SHORT).show();
                 }

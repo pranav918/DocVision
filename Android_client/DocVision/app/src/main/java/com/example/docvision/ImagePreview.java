@@ -196,6 +196,9 @@ public class ImagePreview extends AppCompatActivity {
             new Thread(() -> Glide.get(context).clearDiskCache()).start();
         } else {
             //todo: display text returned by ocr
+            Intent i = new Intent(ImagePreview.this, OCRText.class);
+            i.putExtra("ocrtext", response.url);
+            startActivity(i);
         }
     }
 

@@ -20,7 +20,7 @@ def doop():
         return jsonify({"url":"",
                         "isurl":True})
     elif operation=="ocr":
-        return jsonify({"url":"",
+        return jsonify({"url":ocr(filename),
                         "isurl":False})
         
 @app.route('/getOP/')
