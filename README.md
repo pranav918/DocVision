@@ -25,21 +25,12 @@ Since the Government of India has banned some of the Chinese apps like Camscanne
 2.   Optical Character Recognition (OCR)
 3.   Flask Server
 
-# HIGH LEVEL DESIGN
-<p align="center">
-<img src="https://github.com/lnx2000/DocVision/blob/main/Images/HIGH%20LEVEL%20DESIGN.png" width="600" height="300">
-</p>
-
 
 # RESULTS
 <p align="center">
 <img src="https://github.com/lnx2000/DocVision/blob/main/Images/Result.png" width="600" height="400">
 </p>
 
-# API CALLS
-<p align="center">
-<img src="https://github.com/lnx2000/DocVision/blob/main/Images/API%20Calls.png" width="800" height="400">
-</p>
 
 # CONCLUSION
 We have successfully implemented DocVision app which will help to generate PDF from images. We have added some basic image processing like thresholding, color space conversions, etc. We have also added OCR (Optical Character Recognition) which will detect text from images. We have used Tesseract OCR for the same. We have also built a FLASK server to do heavy work like recognizing text, dealing with larger image sizes.
