@@ -4,12 +4,12 @@ Since the Government of India has banned some of the Chinese apps like Camscanne
 # REQUIREMENTS AND TECH STACK
 1. Hardware Required:\
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Computer with intel i5 and above processor \
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mobile phone with working camera \
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mobile phone with working camera
 2. APIs and Libraries: \
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Design dependencies: ‘com.google.android.material:material:1.2.1’ \
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Pytesseract API, Flask API \
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Deep Learning Libraries: Tensorflow, Keras, OpenCV \
-&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Helper Libraries: Numpy, matplotlib \
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Helper Libraries: Numpy, matplotlib
 3. Technology Stack: \
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Frontend: Java, XML, Android Studio \
 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Backend: Flask \
@@ -38,7 +38,7 @@ Since the Government of India has banned some of the Chinese apps like Camscanne
 
 # API CALLS
 <p align="center">
-<img src="https://github.com/lnx2000/DocVision/blob/main/Images/API%20Calls.png" width="600" height="400">
+<img src="https://github.com/lnx2000/DocVision/blob/main/Images/API%20Calls.png" width="700" height="400">
 </p>
 
 # CONCLUSION
