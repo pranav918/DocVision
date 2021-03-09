@@ -38,7 +38,7 @@ Since the Government of India has banned some of the Chinese apps like Camscanne
 
 # API CALLS
 <p align="center">
-<img src="https://github.com/lnx2000/DocVision/blob/main/Images/API%20Calls.png" width="700" height="400">
+<img src="https://github.com/lnx2000/DocVision/blob/main/Images/API%20Calls.png" width="800" height="400">
 </p>
 
 # CONCLUSION
